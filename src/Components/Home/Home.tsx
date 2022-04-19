@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent  } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import cep from "cep-promise";
+// @ts-ignore
+import brazilianStates from "brazilian-states";
 
 const primary = "#FFF";
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,20 +45,31 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Home: React.FC = function () {
   const [CEP, setCEP] = useState("");
+  const [city, setCity] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [state, setState] = useState("");
+  const [street, setStreet] = useState("");
   const classes = useStyles();
-  console.log(CEP)
-  cep(CEP).then(console.log)
+  //   console.log(CEP)
 
-  const handleChangeCep = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCEP = (e: ChangeEvent<HTMLInputElement>) => {
     setCEP(e.target.value);
-  }
-  return (
+    cep(e.target.value).then((value: any) => {
+      setCity(value.city);
+      setNeighborhood(value.neighborhood);
+      setState(brazilianStates.get(value.state).name);
+      setStreet(value.street);
+      console.log(value);
+      console.log(`Cidade: ${city}`);
+    });
+};
+return (
     <React.Fragment>
       <div className={classes.title}>Achar endereço pelo CEP</div>
       <form className={classes.form} noValidate autoComplete="off">
         <TextField
           value={CEP}
-          onChange={handleChangeCep}
+          onChange={handleChangeCEP}
           inputProps={{ className: classes.textField }}
           InputLabelProps={{ className: classes.textField }}
           id="cep"
@@ -65,6 +78,12 @@ export const Home: React.FC = function () {
           variant="outlined"
         />
       </form>
+      <div>
+        <div>Cidade: {city}</div>
+        <div>Estado: {state}</div>
+        <div>Bairro: {neighborhood}</div>
+        <div>Rua: {street}</div>
+      </div>
     </React.Fragment>
   );
 };
