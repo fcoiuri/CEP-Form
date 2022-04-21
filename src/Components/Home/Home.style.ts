@@ -73,7 +73,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
-      width: '25%',
+      width: 'auto',
       backgroundColor: primary,
       color: secondary,
       display: 'inline-block',
