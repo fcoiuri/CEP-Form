@@ -2,12 +2,21 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./Components/Home";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
   return (
-    <React.Fragment>
-      <Home />
-    </React.Fragment>
+
+    <Router>
+      <Routes>
+      <Route path="/CEP-Form" element={<Home />} />
+      </Routes>
+      {/* <Home /> */}
+    </Router>
   );
 }
 
