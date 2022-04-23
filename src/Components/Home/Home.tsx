@@ -4,8 +4,7 @@ import cep from "cep-promise";
 // @ts-ignore
 import brazilianStates from "brazilian-states";
 import { useStyles } from "./Home.style";
-// @ts-ignore
-import InputMask from "react-input-mask";
+import maskCEP from "../../_utils";
 
 export const Home: React.FC = function () {
   const [info, setInfo] = useState(false);
@@ -18,28 +17,29 @@ export const Home: React.FC = function () {
   const classes = useStyles();
 
   const handleChangeCEP = (e: ChangeEvent<HTMLInputElement>) => {
-    setCEP(e.target.value);
-    // setCEP(
-    //   (e.target.value = Math.max(0, parseInt(e.target.value))
-    //     .toString()
-    //     .slice(0, 9))
-    // );
+    setCEP(maskCEP(e.target.value));
   };
+
   const showNotFound = () => {
     setNotFound(true);
     setInfo(false);
   };
-  const showCEP = (e: React.MouseEvent<HTMLElement>) => {
+
+  const showStreet = (street: string) => {
+    return street
+  }
+
+  const showCEP = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     cep(CEP)
       .then((value: any) => {
-        // setCEP(CEP.substring(0, 5) + "-" + CEP.substring(5));
         setCity(value.city);
         setNeighborhood(value.neighborhood);
         setState(brazilianStates.get(value.state).name);
         setStreet(value.street);
         setInfo(true);
         setNotFound(false);
+        console.log(typeof value);
       })
       .catch(showNotFound());
   };
@@ -57,41 +57,9 @@ export const Home: React.FC = function () {
             label="Digite o CEP"
             variant="outlined"
           />
-          {/* <InputMask mask="99999-999" value={CEP} onChange={handleChangeCEP}>
-            {
-                () => (
-                    <TextField
-                        label="Phone"
-                        variant="outlined"
-                        type="text"
-                        fullWidth
-                        required
-                    />
-                )
-            }
-        </InputMask> */}
-          {/* <InputMask
-            mask="99999-999"
-            value={CEP}
-            id="cep"
-            onChange={handleChangeCEP}
-            InputProps={{ disableUnderline: true }}
-          >
-            {() => (
-              <TextField
-                label="Digite o CEP"
-                id="cep"
-                variant="outlined"
-                inputProps={{ className: classes.textField }}
-                InputLabelProps={{ className: classes.textField }}
-                margin="normal"
-              />
-            )}
-          </InputMask> */}
         </Grid>
         <Grid
           item
-          // alignItems="stretch"
           style={{ display: "flex" }}
           className={classes.botaoGrid}
         >
@@ -110,7 +78,7 @@ export const Home: React.FC = function () {
             <div>Cidade: {city}</div>
             <div>Estado: {state}</div>
             <div>Bairro: {neighborhood}</div>
-            <div>Rua: {street}</div>
+            <div>{street}</div>
           </div>
         </div>
       )}
