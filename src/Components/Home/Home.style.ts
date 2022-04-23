@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginTop: marginTitle,
       fontFamily: 'Akshar, sans-serif',
     },
+
     find: {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
@@ -25,25 +26,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       marginTop: marginTitle,
     },
-    form: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '35ch',
-      },
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-          borderColor: primary,
-        },
-        '&:hover fieldset': {
-          borderColor: primary,
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: primary,
-        },
-      },
-      textAlign: 'center',
-      marginTop: '1%',
-    },
+
     textField: {
       color: `${primary} !important`,
       '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
@@ -51,20 +34,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
       display: 'inline-block',
     },
-    InputMask: {
-      underline: {
-        '&&&:before': {
-          borderBottom: 'none'
-        },
-        '&&:after': {
-          borderBottom: 'none'
-        }
-      }
 
-    },
     wrapper: {
       textAlign: 'center',
     },
+
     info: {
       padding: '2%',
       borderRadius: 25,
@@ -77,14 +51,22 @@ export const useStyles = makeStyles((theme: Theme) =>
       color: secondary,
       display: 'inline-block',
     },
-    botaoGrid:{
+
+    gridButton:{
       marginTop: marginTitle,
     },
-    botao: {
+
+    button: {
       backgroundColor: primary,
       color: secondary,
       fontWeight: 'bolder',
       marginLeft: '5%'
+    },
+    
+    maps: {
+      textDecoration: 'none',
+      fontWeight: 800,
+      color: secondary
     },
   })
 );
