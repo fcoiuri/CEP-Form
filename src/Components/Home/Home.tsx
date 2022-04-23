@@ -39,7 +39,6 @@ export const Home: React.FC = function () {
         setStreet(value.street);
         setInfo(true);
         setNotFound(false);
-        console.log(typeof value);
       })
       .catch(showNotFound());
   };
