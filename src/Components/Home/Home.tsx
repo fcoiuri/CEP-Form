@@ -25,10 +25,6 @@ export const Home: React.FC = function () {
     setInfo(false);
   };
 
-  const showStreet = (street: string) => {
-    return street
-  }
-
   const showCEP = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     cep(CEP)
