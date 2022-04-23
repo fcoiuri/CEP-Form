@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import { Grid, TextField, Button, Typography, Link } from "@material-ui/core";
 import cep from "cep-promise";
 // @ts-ignore
 import brazilianStates from "brazilian-states";
@@ -38,6 +38,11 @@ export const Home: React.FC = function () {
       })
       .catch(showNotFound());
   };
+
+  const showOnGoogleMaps = (cep: string) => {
+    return `https://google.com/maps/search/${cep}`;
+  };
+
   return (
     <React.Fragment>
       <div className={classes.title}>Achar endereço pelo CEP</div>
@@ -53,14 +58,10 @@ export const Home: React.FC = function () {
             variant="outlined"
           />
         </Grid>
-        <Grid
-          item
-          style={{ display: "flex" }}
-          className={classes.botaoGrid}
-        >
+        <Grid item style={{ display: "flex" }} className={classes.gridButton}>
           <Button
             variant="contained"
-            className={classes.botao}
+            className={classes.button}
             onClick={showCEP}
           >
             Buscar
@@ -74,6 +75,19 @@ export const Home: React.FC = function () {
             <div>Estado: {state}</div>
             <div>Bairro: {neighborhood}</div>
             <div>{street}</div>
+          <Typography>
+            <Link
+            className={classes.maps}
+              href={showOnGoogleMaps(CEP)}
+              target="_blank"
+              rel="noopener"
+              onClick={() => {
+                console.log("I'm a button.");
+              }}
+            >
+              Ver no Google Maps
+            </Link>
+          </Typography>
           </div>
         </div>
       )}
