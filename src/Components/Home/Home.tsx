@@ -75,19 +75,16 @@ export const Home: React.FC = function () {
             <div>Estado: {state}</div>
             <div>Bairro: {neighborhood}</div>
             <div>{street}</div>
-          <Typography>
-            <Link
-            className={classes.maps}
-              href={showOnGoogleMaps(CEP)}
-              target="_blank"
-              rel="noopener"
-              onClick={() => {
-                console.log("I'm a button.");
-              }}
-            >
-              Ver no Google Maps
-            </Link>
-          </Typography>
+            <Typography>
+              <Link
+                className={classes.maps}
+                href={showOnGoogleMaps(CEP)}
+                target="_blank"
+                rel="noopener"
+              >
+                Ver no Google Maps
+              </Link>
+            </Typography>
           </div>
         </div>
       )}
